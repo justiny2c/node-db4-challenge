@@ -6,28 +6,60 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const recipes = await Recipes.find();
+    const recipes = await Recipes.getRecipe();
     res.json(recipes);
   } catch (err) {
-    res.status(500).json({ message: 'Failed to get schemes' });
+    res.status(500).json({ message: 'Failed to get recipes' });
   }
 });
 
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
-
   try {
-    const recipe = await Recipes.findById(id);
-
+    const recipe = await Recipes.getRecipeById(id);
     if (recipe) {
       res.json(recipe);
     } else {
-      res.status(404).json({ message: 'Could not find scheme with given id.' })
+      res.status(404).json({ message: 'Could not find recipe with given id.' })
     }
   } catch (err) {
-    res.status(500).json({ message: 'Failed to get schemes' });
+    res.status(500).json({ message: 'Failed to get recipe' });
   }
 });
+
+router.get('/:id/shoppinglist', async (req, res) => {
+    const { id } = req.params
+    try {
+      const ingredients = await Recipes.getShoppingList(id);
+      res.json(ingredients);
+    } catch (err) {
+      res.status(500).json({ message: 'Failed to get shopping list' });
+    }
+});
+
+router.get('/:id/instructions', async (req, res) => {
+    const { id } = req.params
+    try {
+      const instructions = await Recipes.getInstructions(id);
+      res.json(instructions);
+    } catch (err) {
+      res.status(500).json({ message: 'Failed to get shopping list' });
+    }
+});
+
+// router.get('/ingredients', async (req, res) => { 
+//     try {
+//       const recipe = await Recipes.getShoppingList();
+  
+//       if (recipe) {
+//         res.json(recipe);
+//       } else {
+//         res.status(404).json({ message: 'Could not find scheme with given id.' })
+//       }
+//     } catch (err) {
+//       res.status(500).json({ message: 'Failed to get schemes' });
+//     }
+//   });
 
 // router.get('/:id/steps', async (req, res) => {
 //   const { id } = req.params;

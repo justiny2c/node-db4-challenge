@@ -59,7 +59,7 @@ exports.up = function(knex) {
         .onUpdate('CASCADE')
 
         tbl
-        .float("quanitity")
+        .float("quantity")
         .unsigned()
         .notNullable()
     })
