@@ -13,32 +13,32 @@ router.get('/', async (req, res) => {
   }
 });
 
-// router.get('/:id', async (req, res) => {
-//   const { id } = req.params;
+router.get('/:id', async (req, res) => {
+  const { id } = req.params;
 
-//   try {
-//     const scheme = await Schemes.findById(id);
+  try {
+    const recipe = await Recipes.findById(id);
 
-//     if (scheme) {
-//       res.json(scheme);
-//     } else {
-//       res.status(404).json({ message: 'Could not find scheme with given id.' })
-//     }
-//   } catch (err) {
-//     res.status(500).json({ message: 'Failed to get schemes' });
-//   }
-// });
+    if (recipe) {
+      res.json(recipe);
+    } else {
+      res.status(404).json({ message: 'Could not find scheme with given id.' })
+    }
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to get schemes' });
+  }
+});
 
 // router.get('/:id/steps', async (req, res) => {
 //   const { id } = req.params;
 
 //   try {
-//     const steps = await Schemes.findSteps(id);
+//     const steps = await Recipes.findSteps(id);
 
 //     if (steps.length) {
 //       res.json(steps);
 //     } else {
-//       res.status(404).json({ message: 'Could not find steps for given scheme' })
+//       res.status(404).json({ message: 'Could not find steps for given recipe' })
 //     }
 //   } catch (err) {
 //     res.status(500).json({ message: 'Failed to get steps' });

@@ -20,6 +20,10 @@ exports.up = function(knex) {
         .inTable("recipes")
         .onDelete('RESTRICT')
         .onUpdate('CASCADE')
+
+        tbl
+        .integer("step_number")
+        .notNullable()
         
         tbl
         .string("instructions")
@@ -55,7 +59,7 @@ exports.up = function(knex) {
         .onUpdate('CASCADE')
 
         tbl
-        .integer("quanitity")
+        .float("quanitity")
         .unsigned()
         .notNullable()
     })
